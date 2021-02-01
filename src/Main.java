@@ -8,6 +8,15 @@ import RC4.Receiver;
 
 
 public class Main {
+	
+	public static String ba2str(byte[] bytes) {
+		StringBuilder sb = new StringBuilder();
+	    for (byte b : bytes) {
+	        sb.append(String.format("%02X ", b));
+	    }
+	    return sb.toString();
+	}
+	
 	public static void main(String[] args) {
 		// generate the seed shared by the sender and the receiver
 		// they will use this seed to sync on the key,
@@ -35,17 +44,17 @@ public class Main {
 					break;
 				
 				// msg string in bytes
-				System.out.println("msg (bytes): " + msg);
+				System.out.println("msg (bytes): " + ba2str(msg.getBytes()));
 				// encrypt msg
 				ciphertext = sender.encryptMessage(msg.getBytes());
-				System.out.println("ciphertext: " + ciphertext);
+				System.out.println("ciphertext: " + ba2str(ciphertext));
 				
 				System.out.println("*** decrypt the ciphertext ***");
 				
 				// decrypt received msg
 				plaintext = receiver.decryptMessage(ciphertext);
-				System.out.println("plaintext (bytes): " + plaintext);
-				receivedMsg = new String(plaintext, StandardCharsets.UTF_8);
+				System.out.println("plaintext (bytes): " + ba2str(plaintext));
+				receivedMsg = new String(plaintext);
 				System.out.println("received msg: " + receivedMsg);
 			}
 		} catch (Exception e) {
