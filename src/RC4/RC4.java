@@ -7,7 +7,7 @@ public class RC4 {
 	
 	public RC4(final byte[] key) {
 		if (key.length < 1 || key.length > 256) {
-			throw new IllegalArgumentException("Key mus be between 1 and 256 bytes long.");
+			throw new IllegalArgumentException("Key must be between 1 and 256 bytes long.");
 		}
 		keylen = key.length;
 		for (int i = 0; i < 256; i++) {
